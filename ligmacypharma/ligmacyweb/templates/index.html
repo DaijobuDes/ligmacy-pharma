@@ -7,14 +7,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
     {% endblock headerinclude %}
 
-    {% block footerinclude %}
-    <footer class="text-center footer text-faded py-5">
-        <div class="container">
-            <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
-        </div>
-    </footer>
-    {% endblock footerinclude %}
-
     {% block content %}
     <body style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('assets/img/background.jpg');">
         <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">welcome to our pharmacy</span><span class="site-heading-lower">ligmacy pharma</span></h1>
@@ -58,6 +50,14 @@
         <script src="assets/js/current-day.js"></script>
     </body>
     {% endblock content %}
+
+    {% block footerinclude %}
+    <footer class="text-center footer text-faded py-5">
+        <div class="container">
+            <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
+        </div>
+    </footer>
+{% endblock footerinclude %}
 
 
 
