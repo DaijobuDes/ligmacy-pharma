@@ -10,4 +10,6 @@ urlpatterns = [
     path(r'/', views.IndexView.as_view(), name='index'),
     # url(r'/', views.IndexView.as_view(), name='index'),
     url(r'about', views.AboutView.as_view(), name='about'),
+    url(r'sign_in', views.SignInView.as_view(), name='sign_in'),
+    url(r'sign_up', views.SignUpView.as_view(), name='sign_up'),
 ]
