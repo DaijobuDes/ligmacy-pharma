@@ -41,7 +41,9 @@ class SignUpView(View):
 class DashboardView(View):
     def get(self,request):
         meds = Medicine.objects.all()
+        accounts = SignUp.objects.all()
         context = {
-            'med' : meds
+            'med' : meds,
+            'acc' : accounts
         }
         return render(request, 'dashboard.html', context)

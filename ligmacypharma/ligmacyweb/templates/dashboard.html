@@ -34,7 +34,7 @@
                 <div class="d-flex product-item-title"></div>
             </div>
             <div class="table-responsive" style="background: var(--bs-brown);">
-                <table class="table">
+                <table class="table" style="color: white">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -53,6 +53,26 @@
                         </tr>
                         {% endfor %}
                     </tbody>
+                </table>                
+            </div>
+            <div class="table-responsive" style="background: var(--bs-brown);">
+                <table class="table" style="color: white">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in acc %}
+                        <tr>
+                            <td>{{a.email}}</td>
+                            <td>{{a.name}}</td>
+                            <td>{{a.age}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -62,8 +82,8 @@
             <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
         </div>
     </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/current-day.js"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/current-day.js' %}"></script>
 </body>
 
 </html>
