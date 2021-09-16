@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Products - Brand</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
+    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css' %">
+</head>
+
+<body style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url({% static 'assets/img/background.jpg' %});">
+    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3"><br><strong>WELCOME TO OUR PHARMACY</strong><br></span><span class="site-heading-lower">LIGMACY PHARMA</span></h1>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark py-lg-4" id="mainNav">
+        <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">CONTACT US</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">SIGN IN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="text-center page-section">
+        <div class="container text-center">
+            <div class="text-center product-item">
+                <div class="d-flex product-item-title"></div>
+            </div>
+            <div class="table-responsive" style="background: var(--bs-brown);">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in med %}
+                        <tr>
+                            <td>{{m.uid}}</td>
+                            <td>{{m.name}}</td>
+                            <td>{{m.price}}</td>
+                            <td>{{m.stock}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer class="text-center footer text-faded py-5">
+        <div class="container">
+            <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/current-day.js"></script>
+</body>
+
+</html>

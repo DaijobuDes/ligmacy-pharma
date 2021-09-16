@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
+from .forms import *
 
 # Create your views here.
 
@@ -36,3 +37,11 @@ class SignUpView(View):
 
     def get(self, request):
         return render(request, "sign_up.html")
+
+class DashboardView(View):
+    def get(self,request):
+        meds = Medicine.objects.all()
+        context = {
+            'med' : meds
+        }
+        return render(request, 'dashboard.html', context)

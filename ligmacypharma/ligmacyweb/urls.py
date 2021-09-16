@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'about', views.AboutView.as_view(), name='about'),
     url(r'sign_in', views.SignInView.as_view(), name='sign_in'),
     url(r'sign_up', views.SignUpView.as_view(), name='sign_up'),
+    url(r'dashboard', views.DashboardView.as_view(), name='dashboard'),
 ]

@@ -9,3 +9,13 @@ class SignUp(models.Model):
 
     class Meta:
         db_table = "accounts"
+
+
+class Medicine(models.Model):
+    uid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=64)
+    price = models.IntegerField()
+    stock = models.IntegerField()
+
+    class Meta:
+        db_table = "medicine"
