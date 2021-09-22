@@ -53,7 +53,7 @@ class Add_MedicineView(View):
         pass
 
     def post(self, request):
-        form MedicineForm(request.POST)
+        form = MedicineForm(request.POST)
         if form.is_valid():
             medicine_name = request.POST.get("medicine_name")
             price = request.POST.get("price")
@@ -61,4 +61,4 @@ class Add_MedicineView(View):
             form = Medicine(name = medicine_name, price = price, stock = stock)
     
     def get(self,request):
-        return render(request, "add_medicine.html")
+        return render(request, "add_record.html")
