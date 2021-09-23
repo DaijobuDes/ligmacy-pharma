@@ -73,4 +73,4 @@ class Add_MedicineView(View):
         return redirect("ligmacyweb:add_medicine")
     
     def get(self,request):
-        return render(request, "add_medicine.html")
+        return render(request, "add_record.html")
