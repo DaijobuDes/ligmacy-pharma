@@ -18,23 +18,25 @@
         <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href=".">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">CONTACT US</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">SIGN IN</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sign_in">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sign_up">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="add_medicine">Add Record</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard">Dashboard</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <section class="login-dark">
-        <form method="post">
+        <form method="post">{% csrf_token %}
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration"><i class="icon ion-medkit"></i></div>
-            <div class="mb-3"><input class="form-control" type="med_name" name="med_name" placeholder="Medicine Name"></div>
-            <div class="mb-3"><input class="form-control" type="price" name="price" placeholder="Price"></div>
-            <div class="mb-3"><input class="form-control" type="stock" name="stock" placeholder="Available Stock"></div>
+            <div class="mb-3"><input class="form-control" type="med_name" name="med_name" placeholder="Medicine Name" required></div>
+            <div class="mb-3"><input class="form-control" type="price" name="price" placeholder="Price" required></div>
+            <div class="mb-3"><input class="form-control" type="stock" name="stock" placeholder="Available Stock" required></div>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Add Medicine</button></div>
         </form>
     </section>

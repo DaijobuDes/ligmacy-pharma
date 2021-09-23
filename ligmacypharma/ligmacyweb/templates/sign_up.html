@@ -23,7 +23,9 @@
                     <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="sign_in">Sign In</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sign_up">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="add_medicine">Add Record</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard">Dashboard</a></li>
                 </ul>
             </div>
         </div>
@@ -33,10 +35,10 @@
             {% csrf_token %}
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration"><i class="icon ion-document-text"></i></div>
-            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-            <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Name"></div>
-            <div class="mb-3"><input class="form-control" type="number" name="age" placeholder="Age"></div>
+            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" required></div>
+            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required></div>
+            <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Name" required></div>
+            <div class="mb-3"><input class="form-control" type="number" name="age" placeholder="Age" required></div>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Sign Up</button></div><a class="forgot" href="#">Forgot your email or password?</a>
         </form>
     </section>
