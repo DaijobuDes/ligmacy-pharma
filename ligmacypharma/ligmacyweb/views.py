@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
 from django.shortcuts import redirect
@@ -44,6 +45,7 @@ class SignUpView(View):
         age = request.POST.get("age")
         form = SignUp(email = email, password = password,name = name, age = age)
         form.save()
+        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_up'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
         return redirect("ligmacyweb:sign_up")
 
     def get(self, request):
@@ -70,6 +72,7 @@ class Add_MedicineView(View):
         stock = request.POST.get("stock")
         form = Medicine(name = medicine_name, price = price, stock = stock)
         form.save()
+        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/add_medicine'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
         return redirect("ligmacyweb:add_medicine")
     
     def get(self,request):
