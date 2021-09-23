@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'sign_in', views.SignInView.as_view(), name='sign_in'),
     url(r'sign_up', views.SignUpView.as_view(), name='sign_up'),
     url(r'dashboard', views.DashboardView.as_view(), name='dashboard'),
-    url(r'add_record', views.Add_MedicineView.as_view(), name='add_record'),
+    url(r'add_medicine', views.Add_MedicineView.as_view(), name='add_medicine'),
 ]
