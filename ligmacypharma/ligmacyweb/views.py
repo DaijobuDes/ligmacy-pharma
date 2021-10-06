@@ -24,6 +24,15 @@ class AboutView(View):
         return render(request, "about.html")
 
 
+class ContactView(View):
+
+    def __init__(self):
+        pass
+
+    def get(self, request):
+        return render(request, "contact.html")
+
+
 class SignInView(View):
 
     def __init__(self):
