@@ -52,6 +52,55 @@
                             <td>{{m.name}}</td>
                             <td>{{m.price}}</td>
                             <td>{{m.stock}}</td>
+                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Edit
+                              </button></td>
+                              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="staticBackdropLabel">Update Medicine</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <h2 class="visually-hidden">Login Form</h2>
+                                            <div class="mb-3"><input class="form-control" type="med_name" name="med_name" placeholder="{{m.name}}" required></div>
+                                            <div class="mb-3"><input class="form-control" type="price" name="price" placeholder="{{m.price}}" required></div>
+                                            <div class="mb-3"><input class="form-control" type="stock" name="stock" placeholder="{{m.stock}}" required></div>
+                                            <div class="mb-3"><button class="btn btn-primary d-block w-100" onclick="return confirm('Are you sure?')" type="submit">Update Medicine</button></div>
+                                        </form>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Delete
+                              </button>
+                              </td>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Delete Medicine</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Delete Record</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -72,13 +121,82 @@
                             <td>{{a.email}}</td>
                             <td>{{a.name}}</td>
                             <td>{{a.age}}</td>
+                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#account">
+                                Edit
+                              </button></td>
+                              <div class="modal fade" id="account" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="accountLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="accountLabel">Update Account</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <h2 class="visually-hidden">Login Form</h2>
+                                            <div class="mb-3"><input class="form-control" type="med_name" name="med_name" placeholder="{{a.email}}" required></div>
+                                            <div class="mb-3"><input class="form-control" type="price" name="price" placeholder="{{a.name}}" required></div>
+                                            <div class="mb-3"><input class="form-control" type="stock" name="stock" placeholder="{{a.age}}" required></div>
+                                            <div class="mb-3"><button class="btn btn-primary d-block w-100" onclick="return confirm('Are you sure?')" type="submit">Update Account</button></div>
+                                        </form>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteAccount">
+                                Delete
+                              </button>
+                              </td>
+                              <div class="modal fade" id="deleteAccount" tabindex="-1" aria-labelledby="deleteAccountLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="deleteAccountLabel">Delete Account</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Delete Record</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                         </tr>
+                        
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <footer class="text-center footer text-faded py-5">
         <div class="container">
             <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
@@ -86,6 +204,28 @@
     </footer>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/current-day.js' %}"></script>
+    <script>
+        const open = document.getElementById("open_modal");
+        const container = document.getElementById("container");
+        const close = document.getElementById("close_modal");
+
+        open.addEventListener('click', () =>{
+            container.classList.add('show');
+        });
+
+        close.addEventListener('click', () =>{
+            container.classList.remove('show');
+        });
+
+
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+        })
+
+    </script>
 </body>
 
 </html>
