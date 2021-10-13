@@ -7,7 +7,7 @@ from .forms import *
 # Create your views here.
 
 class IndexView(View):
-    
+
     def __init__(self):
         pass
 
@@ -61,7 +61,12 @@ class SignUpView(View):
         return render(request, "sign_up.html")
 
 class DashboardView(View):
-    def get(self,request):
+
+    def __init__(self):
+        pass
+
+    def get(self, request):
+        print(request.GET)
         meds = Medicine.objects.all()
         accounts = SignUp.objects.all()
         context = {
@@ -69,6 +74,30 @@ class DashboardView(View):
             'acc' : accounts
         }
         return render(request, 'dashboard.html', context)
+
+    def post(self, request):
+        if 'btnMedicineUpdateSubmit' in request.POST:
+            med_id = request.POST.get("med_id")
+            med_name = request.POST.get("med_name")
+            price = request.POST.get("price")
+            stock = request.POST.get("stock")
+            Medicine.objects.filter(uid=med_id).update(name=med_name, price=price, stock=stock)
+        if 'btnMedicineDeleteSubmit' in request.POST:
+            med_id = request.POST.get("med_id")
+            Medicine.objects.filter(uid=med_id).delete()
+
+        if 'btnAccountUpdateSubmit' in request.POST:
+            user_id = request.POST.get("user_id")
+            email = request.POST.get("email")
+            name = request.POST.get("name")
+            age = request.POST.get("age")
+            SignUp.objects.filter(id=user_id).update(email=email, name=name, age=age)
+        if 'btnAccountDeleteSubmit' in request.POST:
+            user_id = request.POST.get("user_id")
+            SignUp.objects.filter(id=user_id).delete()
+
+        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/dashboard'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
+
 
 class Add_MedicineView(View):
     def __init__(self):
@@ -83,6 +112,6 @@ class Add_MedicineView(View):
         form.save()
         return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/add_medicine'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
         return redirect("ligmacyweb:add_medicine")
-    
+
     def get(self,request):
         return render(request, "add_medicine.html")
