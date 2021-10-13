@@ -19,7 +19,6 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href=".">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="sign_in">Sign In</a></li>
@@ -52,14 +51,14 @@
                             <td>{{m.name}}</td>
                             <td>{{m.price}}</td>
                             <td>{{m.stock}}</td>
-                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#a{{m.uid}}">
                                 Edit
                               </button></td>
-                              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                              <div class="modal fade" id="a{{m.uid}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="a{{m.uid}}Label" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="staticBackdropLabel">Update Medicine</h5>
+                                      <h5 class="modal-title" id="a{{m.uid}}Label">Update Medicine</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -121,14 +120,14 @@
                             <td>{{a.email}}</td>
                             <td>{{a.name}}</td>
                             <td>{{a.age}}</td>
-                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#account">
+                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b{{a.id}}">
                                 Edit
                               </button></td>
-                              <div class="modal fade" id="account" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="accountLabel" aria-hidden="true">
+                              <div class="modal fade" id="b{{a.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="b{{a.id}}Label" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="accountLabel">Update Account</h5>
+                                      <h5 class="modal-title" id="b{{a.id}}Label">Update Account</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
