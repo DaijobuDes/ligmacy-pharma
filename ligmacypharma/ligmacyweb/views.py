@@ -141,4 +141,12 @@ class CartView(View):
         return render(request, "cart.html", context)
 
     def post(self, request):
-        pass
+        print(request.POST)
+        if 'btnAddToCart' in request.POST:
+            med_id = request.POST.get("med_id")
+            amount = request.POST.get("amount")
+            form = Cart(user_id=SignUp(pk=1), items_id=Medicine(uid=med_id), amount=amount)
+            form.save()
+            print(form)
+
+        return render(request, "cart.html")
