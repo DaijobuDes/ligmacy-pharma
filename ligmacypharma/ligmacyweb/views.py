@@ -143,10 +143,25 @@ class CartView(View):
     def post(self, request):
         print(request.POST)
         if 'btnAddToCart' in request.POST:
+            form = None
             med_id = request.POST.get("med_id")
             amount = request.POST.get("amount")
-            form = Cart(user_id=SignUp(pk=1), items_id=Medicine(uid=med_id), amount=amount)
-            form.save()
+
+            print(type(amount))
+            if amount == '0':
+                Cart.objects.filter(items_id=Medicine(uid=med_id)).delete()
+                return render(request, "cart.html")
+
+            try:
+                data = Cart.objects.get(items_id=Medicine(uid=med_id))
+                if data:
+                    print("true")
+                    Cart.objects.filter(items_id=Medicine(uid=med_id)).update(amount=amount)
+            except:
+                print("false")
+                form = Cart(user_id=SignUp(pk=1), items_id=Medicine(uid=med_id), amount=amount)
+                form.save()
+
             print(form)
 
         return render(request, "cart.html")
