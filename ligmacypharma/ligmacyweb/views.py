@@ -41,6 +41,16 @@ class SignInView(View):
     def get(self, request):
         return render(request, "sign_in.html")
 
+    def post(self, request):
+        data = request.POST
+
+        if data['email'] == '':
+            return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No email supplied.'); }</script><body onload='f()'></body>")
+        if data['password'] == '':
+            return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No password supplied.'); }</script><body onload='f()'></body>")
+
+        return render(request, "sign_in.html")
+
 class SignUpView(View):
 
     def __init__(self):
@@ -66,12 +76,12 @@ class DashboardView(View):
         pass
 
     def get(self, request):
-        print(request.GET)
         meds = Medicine.objects.all()
         accounts = SignUp.objects.all()
         context = {
             'med' : meds,
-            'acc' : accounts
+            'acc' : accounts,
+            'user': self.request.user.id
         }
         return render(request, 'dashboard.html', context)
 
@@ -115,3 +125,20 @@ class Add_MedicineView(View):
 
     def get(self,request):
         return render(request, "add_medicine.html")
+
+
+class CartView(View):
+
+    def __init__(self):
+        pass
+
+    def get(self, request):
+        meds = Medicine.objects.all()
+        context = {
+            'meds': meds
+        }
+
+        return render(request, "cart.html", context)
+
+    def post(self, request):
+        pass
