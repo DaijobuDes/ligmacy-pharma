@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class SignUp(models.Model):
@@ -19,3 +20,12 @@ class Medicine(models.Model):
 
     class Meta:
         db_table = "medicine"
+
+
+class Cart(models.Model):
+    user_id = models.ForeignKey(SignUp, on_delete=models.CASCADE)
+    items_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+
+    class Meta:
+        db_table = "cart"
