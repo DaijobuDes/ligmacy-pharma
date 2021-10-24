@@ -142,6 +142,12 @@ class CartView(View):
 
     def post(self, request):
         print(request.POST)
+
+        meds = Medicine.objects.all()
+        context = {
+            'meds': meds
+        }
+
         if 'btnAddToCart' in request.POST:
             form = None
             med_id = request.POST.get("med_id")
@@ -164,4 +170,4 @@ class CartView(View):
 
             print(form)
 
-        return render(request, "cart.html")
+        return render(request, "cart.html", context)
