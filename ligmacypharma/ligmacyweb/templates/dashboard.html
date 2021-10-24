@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
     <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css' %">
+    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css' %}">
 </head>
 
 <body style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url({% static 'assets/img/background.jpg' %});">
@@ -35,6 +35,7 @@
                 <div class="d-flex product-item-title"></div>
             </div>
             <div class="table-responsive" style="background: var(--bs-brown);">
+              <p> {{user.get_username }} - test</p>
                 <table class="table" style="color: white">
                     <thead>
                         <tr>
