@@ -42,7 +42,33 @@
                         <ul class="list-unstyled text-start mx-auto list-hours mb-5">
                             <li class="d-flex list-unstyled-item list-hours-item">Item<span class="ms-auto">Action</span></li>
                             {% for m in meds %}
-                            <li class="d-flex list-unstyled-item list-hours-item">{{m.name}} - {{m.price}} pesos<span class="ms-auto"><button type="button" class="btn btn-primary">Add to cart</button></span></li>
+                            <li class="d-flex list-unstyled-item list-hours-item">{{m.name}} - {{m.price}} pesos
+                                <span class="ms-auto"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart-{{m.uid}}">Add to cart</button></span>
+                                <!-- Add to cart modal -->
+                                <div class="modal fade" id="cart-{{m.uid}}" data-bs-backdrop="static"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="cart-{{m.uid}}Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="cart-{{m.uid}}Label">Add to cart</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <h2 class="visually-hidden">Add to cart</h2>
+                                                    {% comment %} <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div> {% endcomment %}
+                                                    <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
+                                                    <div class="mb-3">Amount to order: <input class="form-control" type="amount" name="amount" placeholder="Enter 0 for none" required></div>
+                                                    <div class="mb-3"><button class="btn btn-primary d-block w-100" name="btnAddToCart" id="btnAddToCart" onclick="return confirm('Are you sure?')" type="submit">Add to cart</button></div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                             {% endfor %}
                         </ul>
                         <p class="address mb-5"><em><strong>1116 Orchard Street</strong><span><br>Golden Valley, Minnesota</span></em></p>
