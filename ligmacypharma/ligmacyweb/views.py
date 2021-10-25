@@ -7,6 +7,7 @@ from django.views.generic import View
 from django.shortcuts import redirect
 from .forms import *
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 
 # Not the best code but this is to
@@ -60,15 +61,16 @@ class SignInView(View):
 
     def post(self, request):
         data = request.POST
+        print(data)
 
-        if data['email'] == '':
-            return HttpResponse(PageRedirect("sign_in", msg="No email supplied.").redirect())
+        if data['username'] == '':
+            return HttpResponse(PageRedirect("sign_in", msg="No username supplied.").redirect())
             # return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No email supplied.'); }</script><body onload='f()'></body>")
         if data['password'] == '':
             return HttpResponse(PageRedirect("sign_in", msg="No password supplied.").redirect())
             # return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No password supplied.'); }</script><body onload='f()'></body>")
 
-        return render(request, "sign_in.html")
+        return render(request, "profile.html")
 
 # Replaced with RegisterView() Class below
 # class SignUpView(View):
@@ -153,7 +155,7 @@ class Add_MedicineView(View):
         form.save()
 
         return HttpResponse(PageRedirect("add_medicine").redirect())
-        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/add_medicine'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
+        # return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/add_medicine'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
         # return redirect("ligmacyweb:add_medicine")
 
     def get(self,request):
@@ -224,7 +226,7 @@ class RegisterView(View):
 
             form = User(
                 username=username,
-                password=password,
+                password=make_password(password=password),
                 first_name=fname,
                 last_name=lname,
                 email=email
@@ -237,14 +239,15 @@ class RegisterView(View):
         return render(request, "register.html")
 
 class ProfileView(View):
-    
-    def __init(self):
+
+    def __init__(self):
         pass
-    
+
     def get(self, request):
         return render(request, "profile.html")
 
 def login(request):
+    print(request.POST)
     username = request.POST['username']
     password = request.POST['password']
     user = User(username=username, password=password)
