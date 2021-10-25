@@ -20,7 +20,6 @@ class PageRedirect():
         return "<meta http-equiv='refresh' content='2; url='ligmacyweb/"+self.link+"'><script>function f() { alert('"+self.msg+"'); }</script><body onload='f()'></body>"
 
 
-
 # Create your views here.
 
 class IndexView(View):
