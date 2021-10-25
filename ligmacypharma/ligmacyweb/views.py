@@ -1,9 +1,25 @@
+import time
+from django.core.paginator import Page
+
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
 from django.shortcuts import redirect
 from .forms import *
 from django.contrib.auth.models import User
+
+# Not the best code but this is to
+# shorten the code from below
+class PageRedirect():
+
+    def __init__(self, link, msg="Success!"):
+        self.link = link
+        self.msg = msg
+
+    def redirect(self):
+        return "<meta http-equiv='refresh' content='2; url='ligmacyweb/"+self.link+"'><script>function f() { alert('"+self.msg+"'); }</script><body onload='f()'></body>"
+
+
 
 # Create your views here.
 
@@ -46,9 +62,11 @@ class SignInView(View):
         data = request.POST
 
         if data['email'] == '':
-            return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No email supplied.'); }</script><body onload='f()'></body>")
+            return HttpResponse(PageRedirect("sign_in", msg="No email supplied.").redirect())
+            # return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No email supplied.'); }</script><body onload='f()'></body>")
         if data['password'] == '':
-            return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No password supplied.'); }</script><body onload='f()'></body>")
+            return HttpResponse(PageRedirect("sign_in", msg="No password supplied.").redirect())
+            # return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('No password supplied.'); }</script><body onload='f()'></body>")
 
         return render(request, "sign_in.html")
 
@@ -118,7 +136,8 @@ class DashboardView(View):
         #     user_id = request.POST.get("user_id")
         #     SignUp.objects.filter(id=user_id).delete()
 
-        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/dashboard'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
+        return HttpResponse(PageRedirect("dashboard").redirect())
+        # return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/dashboard'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
 
 
 class Add_MedicineView(View):
@@ -132,8 +151,10 @@ class Add_MedicineView(View):
         stock = request.POST.get("stock")
         form = Medicine(name = medicine_name, price = price, stock = stock)
         form.save()
+
+        return HttpResponse(PageRedirect("add_medicine").redirect())
         return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/add_medicine'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
-        return redirect("ligmacyweb:add_medicine")
+        # return redirect("ligmacyweb:add_medicine")
 
     def get(self,request):
         return render(request, "add_medicine.html")
@@ -210,7 +231,7 @@ class RegisterView(View):
             )
             form.save()
 
-        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
+        return HttpResponse(PageRedirect("sign_in").redirect())
 
     def get(self, request):
         return render(request, "register.html")
