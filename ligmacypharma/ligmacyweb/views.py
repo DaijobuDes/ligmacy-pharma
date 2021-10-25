@@ -52,24 +52,25 @@ class SignInView(View):
 
         return render(request, "sign_in.html")
 
-class SignUpView(View):
+# Replaced with RegisterView() Class below
+# class SignUpView(View):
 
-    def __init__(self):
-        pass
+#     def __init__(self):
+#         pass
 
-    def post(self, request):
-        form = SignUpForm(request.POST)
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        name = request.POST.get("name")
-        age = request.POST.get("age")
-        form = SignUp(email = email, password = password,name = name, age = age)
-        form.save()
-        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_up'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
-        return redirect("ligmacyweb:sign_up")
+#     def post(self, request):
+#         form = SignUpForm(request.POST)
+#         email = request.POST.get("email")
+#         password = request.POST.get("password")
+#         name = request.POST.get("name")
+#         age = request.POST.get("age")
+#         form = SignUp(email = email, password = password,name = name, age = age)
+#         form.save()
+#         return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_up'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
+#         return redirect("ligmacyweb:sign_up")
 
-    def get(self, request):
-        return render(request, "sign_up.html")
+#     def get(self, request):
+#         return render(request, "sign_up.html")
 
 class DashboardView(View):
 
@@ -183,6 +184,7 @@ class CartView(View):
 
         return render(request, "cart.html", context)
 
+# Replacement for SignUpView()
 class RegisterView(View):
 
     def __init__(self):
@@ -192,7 +194,7 @@ class RegisterView(View):
         print(request.POST)
 
         if 'btnRegister' in request.POST:
-            form = User
+            form = None
             username = request.POST.get("username")
             password = request.POST.get("password")
             fname = request.POST.get("fname")
@@ -208,7 +210,7 @@ class RegisterView(View):
             )
             form.save()
 
-        return render(request, "register.html")
+        return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/sign_in'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
 
     def get(self, request):
         return render(request, "register.html")
