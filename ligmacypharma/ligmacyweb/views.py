@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.shortcuts import redirect
 from .forms import *
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -77,7 +78,7 @@ class DashboardView(View):
 
     def get(self, request):
         meds = Medicine.objects.all()
-        accounts = SignUp.objects.all()
+        accounts = User.objects.all()
         context = {
             'med' : meds,
             'acc' : accounts,
@@ -100,11 +101,21 @@ class DashboardView(View):
             user_id = request.POST.get("user_id")
             email = request.POST.get("email")
             name = request.POST.get("name")
-            age = request.POST.get("age")
-            SignUp.objects.filter(id=user_id).update(email=email, name=name, age=age)
+            date_joined = request.POST.get("date")
+            User.objects.filter(id=user_id).update(email=email, username=name, date_joined= date_joined)
         if 'btnAccountDeleteSubmit' in request.POST:
             user_id = request.POST.get("user_id")
-            SignUp.objects.filter(id=user_id).delete()
+            User.objects.filter(id=user_id).delete()
+
+        # if 'btnAccountUpdateSubmit' in request.POST:
+        #     user_id = request.POST.get("user_id")
+        #     email = request.POST.get("email")
+        #     name = request.POST.get("name")
+        #     age = request.POST.get("age")
+        #     SignUp.objects.filter(id=user_id).update(email=email, name=name, age=age)
+        # if 'btnAccountDeleteSubmit' in request.POST:
+        #     user_id = request.POST.get("user_id")
+        #     SignUp.objects.filter(id=user_id).delete()
 
         return HttpResponse("<meta http-equiv='refresh' content='2; url='ligmacyweb/dashboard'><script>function f() { alert('Success!'); }</script><body onload='f()'></body>")
 
@@ -171,3 +182,25 @@ class CartView(View):
             print(form)
 
         return render(request, "cart.html", context)
+
+class RegisterView(View):
+
+    def __init__(self):
+        pass
+
+    def post(self, request):
+        print(request.POST)
+
+        if 'btnRegister' in request.POST:
+            form = User
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            # email = request.POST.get("email")
+            
+            form = User(username = username, password= password)
+            form.save()
+
+        return render(request, "register.html")
+
+    def get(self, request):
+        return render(request, "register.html")

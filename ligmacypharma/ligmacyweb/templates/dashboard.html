@@ -14,7 +14,7 @@
       </div>
       <div class="table-responsive" style="background: var(--bs-brown);">
         <p> {{user.get_username }} - test</p>
-          <table class="table" style="color: white">
+          <table class="table" style="color: black">
               <thead>
                   <tr>
                       <th>ID</th>
@@ -92,19 +92,28 @@
           </table>
       </div>
       <div class="table-responsive" style="background: var(--bs-brown);">
-          <table class="table" style="color: white">
+          <table class="table" style="color: black">
               <thead>
                   <tr>
-                      <th>Email</th>
+                      <!-- <th>Email</th>
                       <th>Name</th>
-                      <th>Age</th>
+                      <th>Age</th> -->
+                      <th>User</th>
+                      <th>Date Joined</th>
+                      <th>Email</th>
+                      <th></th>
+                      <th></th>
                   </tr>
               </thead>
               <tbody>
                   {% for a in acc %}
                   <tr>
-                      <td>{{a.email}}</td>
+                      <!-- <td>{{a.email}}</td>
                       <td>{{a.name}}</td>
+                      <td>{{a.age}}</td> -->
+                      <td>{{a.username}}</td>
+                      <td>{{a.date_joined}}</td>
+                      <td>{{a.email}}</td>
                       <td>{{a.age}}</td>
                       <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b{{a.id}}">
                           Edit
@@ -121,9 +130,12 @@
                                       {% csrf_token %}
                                       <h2 class="visually-hidden">Login Form</h2>
                                       <div class="mb-3"><input class="form-control" type="user_id" name="user_id" value="{{a.id}}" hidden></div>
-                                      <div class="mb-3"><input class="form-control" type="email" name="email" value="{{a.email}}" required></div>
+                                      <!-- <div class="mb-3"><input class="form-control" type="email" name="email" value="{{a.email}}" required></div>
                                       <div class="mb-3"><input class="form-control" type="name" name="name" value="{{a.name}}" required></div>
-                                      <div class="mb-3"><input class="form-control" type="age" name="age" value="{{a.age}}" required></div>
+                                      <div class="mb-3"><input class="form-control" type="age" name="age" value="{{a.age}}" required></div> -->
+                                      <div class="mb-3"><input class="form-control" type="name" name="name" value="{{a.username}}" required></div>
+                                      <div class="mb-3"><input class="form-control" type="date" name="date" value="{{a.date_joined}}" required></div>
+                                      <div class="mb-3"><input class="form-control" type="email" name="email" value="{{a.email}}" required></div>
                                       <div class="mb-3"><button class="btn btn-primary d-block w-100" id="btnAccountUpdateSubmit" name="btnAccountUpdateSubmit" onclick="return confirm('Are you sure?')" type="submit">Update Account</button></div>
                                   </form>
 

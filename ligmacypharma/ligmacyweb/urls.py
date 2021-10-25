@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'dashboard', views.DashboardView.as_view(), name='dashboard'),
     url(r'add_medicine', views.Add_MedicineView.as_view(), name='add_medicine'),
     url(r'cart', views.CartView.as_view(), name='cart'),
+    url(r'register', views.RegisterView.as_view(), name='register'),
 ]
