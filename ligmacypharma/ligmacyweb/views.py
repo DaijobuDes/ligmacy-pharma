@@ -195,9 +195,17 @@ class RegisterView(View):
             form = User
             username = request.POST.get("username")
             password = request.POST.get("password")
-            # email = request.POST.get("email")
-            
-            form = User(username = username, password= password)
+            fname = request.POST.get("fname")
+            lname = request.POST.get("lname")
+            email = request.POST.get("email")
+
+            form = User(
+                username=username,
+                password=password,
+                first_name=fname,
+                last_name=lname,
+                email=email
+            )
             form.save()
 
         return render(request, "register.html")
