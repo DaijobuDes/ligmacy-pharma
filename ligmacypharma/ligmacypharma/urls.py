@@ -23,4 +23,5 @@ urlpatterns = [
     path('ligmacyweb', include('ligmacyweb.urls')),
     # url(r'^ligmacyweb/', include('ligmacyweb.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 # Create your models here.
 class SignUp(models.Model):
@@ -29,3 +31,7 @@ class Cart(models.Model):
 
     class Meta:
         db_table = "cart"
+
+# class UserSession(models.Model):
+#     user= models.ForeignKey(User, on_delete=models.CASCADE)
+#     session=models.ForeignKey(Session)

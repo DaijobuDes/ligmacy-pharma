@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from .forms import *
 from django.contrib.auth.models import User
 
+
 # Not the best code but this is to
 # shorten the code from below
 class PageRedirect():
@@ -234,3 +235,25 @@ class RegisterView(View):
 
     def get(self, request):
         return render(request, "register.html")
+
+class ProfileView(View):
+    
+    def __init(self):
+        pass
+    
+    def get(self, request):
+        return render(request, "profile.html")
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = User(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('index.html')  # Redirect to a success page.
+        else:
+            return HttpResponse("disabled account")  # Return a 'disabled account' error message
+
+    else:
+        return HttpResponse("invalid login")  # Return an 'invalid login' error message.
