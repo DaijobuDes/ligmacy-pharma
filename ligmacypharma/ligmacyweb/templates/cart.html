@@ -1,106 +1,61 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+{% block head %}
     <title>Cart | Ligmacy Pharma</title>
-    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Registration-Form-with-Photo.css' %}">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+{% endblock %}
 
-<body style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url({% static 'assets/img/bg.jpg' %});">
-    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">Welcome To Our Pharmacy</span><span class="site-heading-lower">Ligmacy Pharma</span></h1>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark py-lg-4" id="mainNav">
-        <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href=".">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sign_in">Sign In</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sign_up">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="add_medicine">Add Record</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart">Cart</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <section class="page-section cta">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <div class="text-center cta-inner rounded">
-                        <h2 class="section-heading mb-5"><span class="section-heading-upper">Come On In</span><span class="section-heading-lower">STORE STOCKS</span></h2>
-                        <ul class="list-unstyled text-start mx-auto list-hours mb-5">
-                            <li class="d-flex list-unstyled-item list-hours-item">Item<span class="ms-auto">Action</span></li>
-                            {% for m in meds %}
-                            <li class="d-flex list-unstyled-item list-hours-item">{{m.name}} - {{m.price}} pesos
-                                <span class="ms-auto"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart-{{m.uid}}">Add to cart</button></span>
-                                <!-- Add to cart modal -->
-                                <div class="modal fade" id="cart-{{m.uid}}" data-bs-backdrop="static"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="cart-{{m.uid}}Label" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="cart-{{m.uid}}Label">Add to cart</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post">
-                                                    {% csrf_token %}
-                                                    <h2 class="visually-hidden">Add to cart</h2>
-                                                    {% comment %} <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div> {% endcomment %}
-                                                    <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
-                                                    <div class="mb-3">Amount to order: <input class="form-control" type="amount" name="amount" placeholder="Enter 0 for none" required></div>
-                                                    <div class="mb-3"><button class="btn btn-primary d-block w-100" name="btnAddToCart" id="btnAddToCart" onclick="return confirm('Are you sure?')" type="submit">Add to cart</button></div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
+{% block content %}
+
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="text-center cta-inner rounded">
+                    <h2 class="section-heading mb-5"><span class="section-heading-upper">Come On In</span><span class="section-heading-lower">STORE STOCKS</span></h2>
+                    <ul class="list-unstyled text-start mx-auto list-hours mb-5">
+                        <li class="d-flex list-unstyled-item list-hours-item">Item<span class="ms-auto">Action</span></li>
+                        {% for m in meds %}
+                        <li class="d-flex list-unstyled-item list-hours-item">{{m.name}} - {{m.price}} pesos
+                            <span class="ms-auto"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart-{{m.uid}}">Add to cart</button></span>
+                            <!-- Add to cart modal -->
+                            <div class="modal fade" id="cart-{{m.uid}}" data-bs-backdrop="static"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="cart-{{m.uid}}Label" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cart-{{m.uid}}Label">Add to cart</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <h2 class="visually-hidden">Add to cart</h2>
+                                                {% comment %} <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div> {% endcomment %}
+                                                <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
+                                                <div class="mb-3">Amount to order: <input class="form-control" type="amount" name="amount" placeholder="Enter 0 for none" required></div>
+                                                <div class="mb-3"><button class="btn btn-primary d-block w-100" name="btnAddToCart" id="btnAddToCart" onclick="return confirm('Are you sure?')" type="submit">Add to cart</button></div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <p class="address mb-5"><em><strong>1116 Orchard Street</strong><span><br>Golden Valley, Minnesota</span></em></p>
-                        <p class="address mb-0"><small><em>Call Anytime</em></small><span><br>(317) 585-8468</span></p>
-                    </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <p class="address mb-5"><em><strong>1116 Orchard Street</strong><span><br>Golden Valley, Minnesota</span></em></p>
+                    <p class="address mb-0"><small><em>Call Anytime</em></small><span><br>(317) 585-8468</span></p>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="page-section about-heading">
-        <div class="container"><img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="{% static 'assets/img/background.jpg' %}">
-            <div class="about-heading-content">
-                <div class="row">
-                    <div class="col-lg-10 col-xl-9 mx-auto">
-                        <div class="bg-faded rounded p-5">
-                            <h2 class="section-heading mb-4"><span class="section-heading-upper">Best pharmacy out there</span><span class="section-heading-lower">&nbsp;About Our Services</span></h2>
-                            <p>Founded in 1987 by the Hernandez brothers, our establishment has been serving up the best medicines sourced from branded products in various regions of the world. We are dedicated to travelling the world, finding the best quality, and bringing back to you here in our pharmacy.</p>
-                            <p class="mb-0"><span>We guarantee that you will be&nbsp;</span><span>safe</span><span>&nbsp;with best quality medicines the moment you walk inside. Join us for your daily routine, an outing with friends, or simply just to buy some medicines.</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="text-center footer text-faded py-5">
-        <section class="login-clean" style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65))"></section>
-        <div class="container">
-            <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'assets/js/current-day.js' %}"></script>
-</body>
+    </div>
+</section>
 
-</html>
+{% endblock %}

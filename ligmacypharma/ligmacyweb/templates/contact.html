@@ -1,60 +1,28 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Contact | Ligmacy Pharma</title>
-    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="{% static 'assets/css/Contact-Form-Clean.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Clean.css '%}">
-    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css '%} ">
-    <link rel="stylesheet" href="{% static 'assets/css/Registration-Form-with-Photo.css '%}">
-</head>
 
-<body style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url({% static 'assets/img/background.jpg' %});">
-    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">welcome to our pharmacy</span><span class="site-heading-lower">ligmacy pharma</span></h1>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark py-lg-4" id="mainNav">
-        <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href=".">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sign_in">Sign In</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sign_up">Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <section class="page-section clearfix">
-        <div class="container">
-            <div class="intro"></div>
-        </div>
-    </section>
-    <section class="page-section cta">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <div class="text-center cta-inner rounded">
-                        <h2 class="section-heading mb-4"><span class="section-heading-upper">ANY QUESTIONS</span><span class="section-heading-lower">CONTACT US</span></h2>
-                        <p class="text-center mb-0">Email us on <a href="mailto:ligmacypharma@gmail.com">ligmacypharma@gmail.com</a><br>Our Facebook Page: <a href="https://facebook.com">Link</a><br>Our Twitter Page: <a href="https://twitter.com">Link</a></p>
-                    </div>
+{% block head %}
+<title>Contact Us | Ligmacy Pharma</title>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro"></div>
+    </div>
+</section>
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="text-center cta-inner rounded">
+                    <h2 class="section-heading mb-4"><span class="section-heading-upper">ANY QUESTIONS</span><span class="section-heading-lower">CONTACT US</span></h2>
+                    <p class="text-center mb-0">Email us on <a href="mailto:ligmacypharma@gmail.com">ligmacypharma@gmail.com</a><br>Our Facebook Page: <a href="https://facebook.com">Link</a><br>Our Twitter Page: <a href="https://twitter.com">Link</a></p>
                 </div>
             </div>
         </div>
-    </section>
-    <footer class="text-center footer text-faded py-5">
-        <section class="login-clean" style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65))"></section>
-        <div class="container">
-            <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/current-day.js"></script>
-</body>
+    </div>
+</section>
 
-</html>
+{% endblock %}

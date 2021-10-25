@@ -1,243 +1,213 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Products - Brand</title>
-    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
-    <link rel="stylesheet" href="{% static 'assets/fonts/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/Login-Form-Dark.css' %}">
-</head>
 
-<body style="background:linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url({% static 'assets/img/background.jpg' %});">
-    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3"><br><strong>WELCOME TO OUR PHARMACY</strong><br></span><span class="site-heading-lower">LIGMACY PHARMA</span></h1>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark py-lg-4" id="mainNav">
-        <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href=".">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sign_in">Sign In</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sign_up">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="add_medicine">Add Record</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard">Dashboard</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <section class="text-center page-section">
-        <div class="container text-center">
-            <div class="text-center product-item">
-                <div class="d-flex product-item-title"></div>
-            </div>
-            <div class="table-responsive" style="background: var(--bs-brown);">
-              <p> {{user.get_username }} - test</p>
-                <table class="table" style="color: white">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for m in med %}
-                        <tr>
-                            <td>{{m.uid}}</td>
-                            <td>{{m.name}}</td>
-                            <td>{{m.price}}</td>
-                            <td>{{m.stock}}</td>
-                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#a{{m.uid}}">
-                                Edit
-                              </button></td>
-                              <div class="modal fade" id="a{{m.uid}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="a{{m.uid}}Label" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="a{{m.uid}}Label">Update Medicine</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form method="post">
-                                        {% csrf_token %}
-                                        <h2 class="visually-hidden">Login Form</h2>
-                                        <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
-                                        <div class="mb-3"><input class="form-control" type="med_name" name="med_name" value="{{m.name}}" required></div>
-                                        <div class="mb-3"><input class="form-control" type="price" name="price" value="{{m.price}}" required></div>
-                                        <div class="mb-3"><input class="form-control" type="stock" name="stock" value="{{m.stock}}" required></div>
-                                        <div class="mb-3"><button class="btn btn-primary d-block w-100" name="btnMedicineUpdateSubmit" id="btnMedicineUpdateSubmit" onclick="return confirm('Are you sure?')" type="submit">Update Medicine</button></div>
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#a-del{{m.uid}}">
-                                Delete
-                              </button>
-                              </td>
-                              <div class="modal fade" id="a-del{{m.uid}}" tabindex="-1" aria-labelledby="a-del{{m.uid}}Label" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="a-del{{m.uid}}Label">Delete Medicine</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      Deleting ID: {{m.uid}}, are you sure to delete?
-                                    </div>
-                                    <div class="modal-footer">
-                                      <form method="POST">
-                                        {% csrf_token %}
-                                        <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
-                                        <button type="submit" class="btn btn-primary" name="btnMedicineDeleteSubmit" id="btnMedicineDeleteSubmit">Delete Record</button>
-                                      </form>
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
+{% block head %}
+<title>Dashboard | Ligmacy Pharma</title>
+{% endblock %}
 
-                                  </div>
-                                </div>
-                              </div>
+{% block content %}
 
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="table-responsive" style="background: var(--bs-brown);">
-                <table class="table" style="color: white">
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for a in acc %}
-                        <tr>
-                            <td>{{a.email}}</td>
-                            <td>{{a.name}}</td>
-                            <td>{{a.age}}</td>
-                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b{{a.id}}">
-                                Edit
-                              </button></td>
-                              <div class="modal fade" id="b{{a.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="b{{a.id}}Label" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="b{{a.id}}Label">Update Account</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post">
-                                            {% csrf_token %}
-                                            <h2 class="visually-hidden">Login Form</h2>
-                                            <div class="mb-3"><input class="form-control" type="user_id" name="user_id" value="{{a.id}}" hidden></div>
-                                            <div class="mb-3"><input class="form-control" type="email" name="email" value="{{a.email}}" required></div>
-                                            <div class="mb-3"><input class="form-control" type="name" name="name" value="{{a.name}}" required></div>
-                                            <div class="mb-3"><input class="form-control" type="age" name="age" value="{{a.age}}" required></div>
-                                            <div class="mb-3"><button class="btn btn-primary d-block w-100" id="btnAccountUpdateSubmit" name="btnAccountUpdateSubmit" onclick="return confirm('Are you sure?')" type="submit">Update Account</button></div>
-                                        </form>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b-del{{a.id}}">
-                                Delete
-                              </button>
-                              </td>
-                              <div class="modal fade" id="b-del{{a.id}}" tabindex="-1" aria-labelledby="b-del{{a.id}}Label" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="b-del{{a.id}}">Delete Account</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      Deleting ID: {{a.id}}, are you sure?
-                                    </div>
-                                    <div class="modal-footer">
-                                      <form method="POST">
-                                        {% csrf_token %}
-                                        <div class="mb-3"><input class="form-control" type="user_id" name="user_id" value="{{a.id}}" hidden></div>
-                                        <button type="submit" class="btn btn-primary" name="btnAccountDeleteSubmit" id="btnAccountDeleteSubmit">Delete Record</button>
-                                      </form>
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                        </tr>
-
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-
-      <!-- Modal -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-          </div>
-        </div>
+<section class="text-center page-section">
+  <div class="container text-center">
+      <div class="text-center product-item">
+          <div class="d-flex product-item-title"></div>
       </div>
-    <footer class="text-center footer text-faded py-5">
-        <div class="container">
-            <p class="m-0 small">Copyright&nbsp;©&nbsp;Ligmacy Pharma 2021</p>
-        </div>
-    </footer>
-    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/current-day.js' %}"></script>
-    <script>
-        const open = document.getElementById("open_modal");
-        const container = document.getElementById("container");
-        const close = document.getElementById("close_modal");
+      <div class="table-responsive" style="background: var(--bs-brown);">
+        <p> {{user.get_username }} - test</p>
+          <table class="table" style="color: white">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Stock</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for m in med %}
+                  <tr>
+                      <td>{{m.uid}}</td>
+                      <td>{{m.name}}</td>
+                      <td>{{m.price}}</td>
+                      <td>{{m.stock}}</td>
+                      <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#a{{m.uid}}">
+                          Edit
+                        </button></td>
+                        <div class="modal fade" id="a{{m.uid}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="a{{m.uid}}Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="a{{m.uid}}Label">Update Medicine</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="post">
+                                  {% csrf_token %}
+                                  <h2 class="visually-hidden">Login Form</h2>
+                                  <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
+                                  <div class="mb-3"><input class="form-control" type="med_name" name="med_name" value="{{m.name}}" required></div>
+                                  <div class="mb-3"><input class="form-control" type="price" name="price" value="{{m.price}}" required></div>
+                                  <div class="mb-3"><input class="form-control" type="stock" name="stock" value="{{m.stock}}" required></div>
+                                  <div class="mb-3"><button class="btn btn-primary d-block w-100" name="btnMedicineUpdateSubmit" id="btnMedicineUpdateSubmit" onclick="return confirm('Are you sure?')" type="submit">Update Medicine</button></div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#a-del{{m.uid}}">
+                          Delete
+                        </button>
+                        </td>
+                        <div class="modal fade" id="a-del{{m.uid}}" tabindex="-1" aria-labelledby="a-del{{m.uid}}Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="a-del{{m.uid}}Label">Delete Medicine</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Deleting ID: {{m.uid}}, are you sure to delete?
+                              </div>
+                              <div class="modal-footer">
+                                <form method="POST">
+                                  {% csrf_token %}
+                                  <div class="mb-3"><input class="form-control" type="med_id" name="med_id" value="{{m.uid}}" hidden></div>
+                                  <button type="submit" class="btn btn-primary" name="btnMedicineDeleteSubmit" id="btnMedicineDeleteSubmit">Delete Record</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
 
-        open.addEventListener('click', () =>{
-            container.classList.add('show');
-        });
+                            </div>
+                          </div>
+                        </div>
 
-        close.addEventListener('click', () =>{
-            container.classList.remove('show');
-        });
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      <div class="table-responsive" style="background: var(--bs-brown);">
+          <table class="table" style="color: white">
+              <thead>
+                  <tr>
+                      <th>Email</th>
+                      <th>Name</th>
+                      <th>Age</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for a in acc %}
+                  <tr>
+                      <td>{{a.email}}</td>
+                      <td>{{a.name}}</td>
+                      <td>{{a.age}}</td>
+                      <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b{{a.id}}">
+                          Edit
+                        </button></td>
+                        <div class="modal fade" id="b{{a.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="b{{a.id}}Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="b{{a.id}}Label">Update Account</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                  <form method="post">
+                                      {% csrf_token %}
+                                      <h2 class="visually-hidden">Login Form</h2>
+                                      <div class="mb-3"><input class="form-control" type="user_id" name="user_id" value="{{a.id}}" hidden></div>
+                                      <div class="mb-3"><input class="form-control" type="email" name="email" value="{{a.email}}" required></div>
+                                      <div class="mb-3"><input class="form-control" type="name" name="name" value="{{a.name}}" required></div>
+                                      <div class="mb-3"><input class="form-control" type="age" name="age" value="{{a.age}}" required></div>
+                                      <div class="mb-3"><button class="btn btn-primary d-block w-100" id="btnAccountUpdateSubmit" name="btnAccountUpdateSubmit" onclick="return confirm('Are you sure?')" type="submit">Update Account</button></div>
+                                  </form>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b-del{{a.id}}">
+                          Delete
+                        </button>
+                        </td>
+                        <div class="modal fade" id="b-del{{a.id}}" tabindex="-1" aria-labelledby="b-del{{a.id}}Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="b-del{{a.id}}">Delete Account</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Deleting ID: {{a.id}}, are you sure?
+                              </div>
+                              <div class="modal-footer">
+                                <form method="POST">
+                                  {% csrf_token %}
+                                  <div class="mb-3"><input class="form-control" type="user_id" name="user_id" value="{{a.id}}" hidden></div>
+                                  <button type="submit" class="btn btn-primary" name="btnAccountDeleteSubmit" id="btnAccountDeleteSubmit">Delete Record</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  </tr>
+
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+</section>
 
 
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const open = document.getElementById("open_modal");
+  const container = document.getElementById("container");
+  const close = document.getElementById("close_modal");
 
-        myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-        })
+  open.addEventListener('click', () =>{
+      container.classList.add('show');
+  });
 
-    </script>
-</body>
+  close.addEventListener('click', () =>{
+      container.classList.remove('show');
+  });
 
-</html>
+
+  var myModal = document.getElementById('myModal')
+  var myInput = document.getElementById('myInput')
+
+  myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+  })
+
+</script>
+
+{% endblock %}
