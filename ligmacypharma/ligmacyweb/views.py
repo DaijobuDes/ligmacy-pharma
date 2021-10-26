@@ -170,9 +170,13 @@ class CartView(View):
     def get(self, request):
         items = CartItem.objects.filter(user_id=request.user.id)
         meds = Medicine.objects.all()
+        total = 0
+        for x in items:
+            total += x.amount * x.items_id.price 
         context = {
             'items': items,
-            'meds' : meds
+            'meds' : meds,
+            'total' : total
         }
 
         return render(request, "cart.html", context)
@@ -181,6 +185,8 @@ class CartView(View):
         print(request.POST)
         items = CartItem.objects.filter(user_id=User.id)
         meds = Medicine.objects.all()
+        
+
         context = {
             'items': items,
             'meds' : meds
