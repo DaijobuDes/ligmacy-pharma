@@ -25,7 +25,7 @@ class Medicine(models.Model):
 
 
 class Cart(models.Model):
-    user_id = models.ForeignKey(SignUp, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     items_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
@@ -35,3 +35,11 @@ class Cart(models.Model):
 # class UserSession(models.Model):
 #     user= models.ForeignKey(User, on_delete=models.CASCADE)
 #     session=models.ForeignKey(Session)
+
+class CartItem(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    items_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+
+    class Meta:
+        db_table = "cartItem"

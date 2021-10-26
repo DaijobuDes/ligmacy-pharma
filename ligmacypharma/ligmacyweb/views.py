@@ -168,39 +168,43 @@ class CartView(View):
         pass
 
     def get(self, request):
+        items = CartItem.objects.all()
         meds = Medicine.objects.all()
         context = {
-            'meds': meds
+            'items': items,
+            'meds' : meds
         }
 
         return render(request, "cart.html", context)
 
     def post(self, request):
         print(request.POST)
-
+        items = CartItem.objects.filter(user_id=User.id)
         meds = Medicine.objects.all()
         context = {
-            'meds': meds
+            'items': items,
+            'meds' : meds
         }
 
         if 'btnAddToCart' in request.POST:
             form = None
             med_id = request.POST.get("med_id")
             amount = request.POST.get("amount")
+            user_id = request.POST.get("user_id")
 
             print(type(amount))
             if amount == '0':
-                Cart.objects.filter(items_id=Medicine(uid=med_id)).delete()
+                CartItem.objects.filter(user_id=User(user_id=user_id),items_id=Medicine(uid=med_id)).delete()
                 return render(request, "cart.html")
 
             try:
-                data = Cart.objects.get(items_id=Medicine(uid=med_id))
+                data = CartItem.objects.get(items_id=Medicine(uid=med_id))
                 if data:
                     print("true")
-                    Cart.objects.filter(items_id=Medicine(uid=med_id)).update(amount=amount)
+                    CartItem.objects.filter(items_id=Medicine(uid=med_id)).update(amount=amount)
             except:
                 print("false")
-                form = Cart(user_id=SignUp(pk=1), items_id=Medicine(uid=med_id), amount=amount)
+                form = CartItem(user_id=User(id=user_id), items_id=Medicine(uid=med_id), amount=amount)
                 form.save()
 
             print(form)
@@ -246,17 +250,48 @@ class ProfileView(View):
     def get(self, request):
         return render(request, "profile.html")
 
-def login(request):
-    print(request.POST)
-    username = request.POST['username']
-    password = request.POST['password']
-    user = User(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return redirect('index.html')  # Redirect to a success page.
-        else:
-            return HttpResponse("disabled account")  # Return a 'disabled account' error message
+class StoreView(View):
 
-    else:
-        return HttpResponse("invalid login")  # Return an 'invalid login' error message.
+    def __init__(self):
+        pass
+
+    def get(self, request):
+        meds = Medicine.objects.all()
+        context = {
+            'meds': meds
+        }
+
+        return render(request, "store.html", context)
+
+    def post(self, request):
+        print(request.POST)
+
+        meds = Medicine.objects.all()
+        context = {
+            'meds': meds
+        }
+
+        if 'btnAddToCart' in request.POST:
+            form = None
+            med_id = request.POST.get("med_id")
+            amount = request.POST.get("amount")
+            user_id = request.POST.get("user_id")
+
+            print(type(amount))
+            if amount == '0':
+                CartItem.objects.filter(items_id=Medicine(uid=med_id)).delete()
+                return render(request, "cart.html")
+
+            try:
+                data = CartItem.objects.get(items_id=Medicine(uid=med_id))
+                if data:
+                    print("true")
+                    CartItem.objects.filter(items_id=Medicine(uid=med_id)).update(amount=amount)
+            except:
+                print("false")
+                form = CartItem(user_id=User(id=user_id), items_id=Medicine(uid=med_id), amount=amount)
+                form.save()
+
+            print(form)
+
+        return render(request, "store.html", context)
