@@ -40,6 +40,11 @@
                         {% endfor %}
                     </table>
                     <h2 style="font-family:Nirmala UI">Total: Php {{total}}</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <!-- <div class="mb-3"><input class="form-control" type="text" name="user_id" value="{{user.id}}" hidden></div> -->
+                        <span><button type="submit" class="btn btn-secondary" id="btnPay" name="btnPay">Pay</button></span>
+                    </form>
                     <!-- <p class="address mb-5"><em><strong>1116 Orchard Street</strong><span><br>Golden Valley, Minnesota</span></em></p>
                     <p class="address mb-0"><small><em>Call Anytime</em></small><span><br>(317) 585-8468</span></p> -->
                 </div>

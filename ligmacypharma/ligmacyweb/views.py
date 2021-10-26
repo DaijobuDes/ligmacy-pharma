@@ -182,40 +182,13 @@ class CartView(View):
         return render(request, "cart.html", context)
 
     def post(self, request):
-        print(request.POST)
-        items = CartItem.objects.filter(user_id=User.id)
-        meds = Medicine.objects.all()
-        
+        items = CartItem.objects.filter(user_id=request.user.id)
 
-        context = {
-            'items': items,
-            'meds' : meds
-        }
-
-        if 'btnAddToCart' in request.POST:
+        if 'btnPay' in request.POST:
             form = None
-            med_id = request.POST.get("med_id")
-            amount = request.POST.get("amount")
-            user_id = request.POST.get("user_id")
+            CartItem.objects.filter(user_id=request.user.id).delete()
 
-            print(type(amount))
-            if amount == '0':
-                CartItem.objects.filter(user_id=User(user_id=user_id),items_id=Medicine(uid=med_id)).delete()
-                return render(request, "cart.html")
-
-            try:
-                data = CartItem.objects.get(items_id=Medicine(uid=med_id))
-                if data:
-                    print("true")
-                    CartItem.objects.filter(items_id=Medicine(uid=med_id)).update(amount=amount)
-            except:
-                print("false")
-                form = CartItem(user_id=User(id=user_id), items_id=Medicine(uid=med_id), amount=amount)
-                form.save()
-
-            print(form)
-
-        return render(request, "cart.html", context)
+        return render(request, "cart.html")
 
 # Replacement for SignUpView()
 class RegisterView(View):
