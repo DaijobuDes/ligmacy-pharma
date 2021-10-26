@@ -168,7 +168,7 @@ class CartView(View):
         pass
 
     def get(self, request):
-        items = CartItem.objects.all()
+        items = CartItem.objects.filter(user_id=request.user.id)
         meds = Medicine.objects.all()
         context = {
             'items': items,
